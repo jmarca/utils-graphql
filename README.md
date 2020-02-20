@@ -1,4 +1,4 @@
-# @jumpn/utils-graphql
+# @activimetrics/utils-graphql
 
 > GraphQL utilities
 
@@ -33,15 +33,17 @@
 
 ### Using [npm](https://docs.npmjs.com/cli/npm)
 
-    $ npm install --save @jumpn/utils-graphql
+    $ npm install --save @activimetrics/utils-graphql
 
 ### Using [yarn](https://yarnpkg.com)
 
-    $ yarn add @jumpn/utils-graphql
+    $ yarn add @activimetrics/utils-graphql
 
 ## Types
 
 ```javascript
+export type {DocumentNode} from "graphql/language/ast";
+
 type GqlErrorLocation = {|
   line: number,
   column: number
@@ -195,4 +197,4 @@ Returns **GqlRequestCompat&lt;Variables>**
 
 ## License
 
-[MIT](LICENSE.txt) :copyright: **Jumpn Limited**
+[MIT](LICENSE.txt) :copyright: 2020 **James Marca**,  2018 **Jumpn Limited**

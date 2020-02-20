@@ -1,19 +1,25 @@
 {
-  "name": "@jumpn/utils-graphql",
-  "version": "0.5.3",
+  "name": "@activimetrics/utils-graphql",
+  "version": "0.6.0",
   "description": "GraphQL utilities",
+  "public": true,
+  "access": "public",
   "module": "dist/index.js",
   "main": "compat/cjs/index.js",
   "react-native": "src/index.js",
   "scripts": {
     "build:clean": "rm -rfv dist compat",
-    "build:flow:copy-source": "flow-copy-source -v src",
-    "build:flow": "yarn run build:flow:copy-source dist && yarn run build:flow:copy-source compat/cjs",
+    "flow-copy-source": "flow-copy-source -v src",
+    "build:flow": "yarn run flow-copy-source dist && yarn run flow-copy-source compat/cjs",
     "build:readme": "pkg-to-readme --template ./readmeTemplate.ejs --force && documentation readme src/** --markdown-toc=false --section API && doctoc README.md",
     "build:src": "rollup -c",
     "build": "yarn run build:clean && yarn run build:src && yarn run build:flow && yarn run build:readme",
     "lint": "eslint --rule 'flowtype-errors/show-errors: error'",
     "lint:fix": "yarn run lint -- --fix",
+    "release": "np",
+    "precommit": "lint-staged",
+    "commit": "commit",
+    "commitmsg": "commitlint -e",
     "version": "yarn run build:readme && git add README.md",
     "prepack": "yarn run build:clean && yarn run build:src && yarn run build:flow"
   },
@@ -25,17 +31,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jumpn/utils-graphql.git"
+    "url": "https://github.com/jmarca/utils-graphql.git"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
-  "author": "Mauro Titimoli <mauro@jumpn.com> (https://github.com/mgtitimoli)",
+  "author": [
+    "James E. Marca <james@activimetrics.com> (https://github.com/jmarca)",
+    "Mauro Titimoli <mauro@jumpn.com> (https://github.com/mgtitimoli)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jumpn/utils-graphql/issues"
+    "url": "https://github.com/jmarca/utils-graphql/issues"
   },
-  "homepage": "https://github.com/jumpn/utils-graphql#readme",
+  "homepage": "https://github.com/jmarca/utils-graphql#readme",
   "keywords": [
     "flow",
     "graphql",
@@ -43,18 +53,23 @@
     "utils"
   ],
   "dependencies": {
-    "@babel/runtime": "7.2.0",
-    "core-js": "2.6.0",
-    "graphql": "14.0.2"
+    "@babel/runtime": "^7.8.4",
+    "graphql": "^14.6.0"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "@babel/plugin-transform-runtime": "7.2.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-arrow-functions": "^7.8.3",
+    "@babel/plugin-transform-async-to-generator": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-flow": "^7.8.3",
     "@commitlint/cli": "7.2.1",
     "@commitlint/config-conventional": "7.1.2",
     "@commitlint/prompt-cli": "7.2.1",
     "babel-eslint": "10.0.1",
-    "doctoc": "1.4.0",
+    "doctoc": "^1.4.0",
     "documentation": "9.0.0",
     "eslint": "5.10.0",
     "eslint-config-airbnb-base": "13.1.0",
@@ -63,18 +78,18 @@
     "eslint-plugin-flowtype-errors": "3.6.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-prettier": "3.0.0",
-    "flow-bin": "0.88.0",
-    "flow-copy-source": "2.0.2",
-    "flow-typed": "2.5.1",
+    "flow-bin": "^0.118.0",
+    "flow-copy-source": "^2.0.9",
     "husky": "1.2.0",
     "lint-staged": "8.1.0",
-    "np": "3.0.4",
+    "np": "^6.1.0",
     "pascal-case": "2.0.1",
-    "pkg-to-readme": "1.1.0",
+    "pkg-to-readme": "^1.1.0",
     "prettier": "1.15.3",
-    "rollup": "0.67.4",
-    "rollup-plugin-babel": "4.1.0",
-    "rollup-plugin-commonjs": "9.2.0",
-    "rollup-plugin-node-resolve": "4.0.0"
+    "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "zen-observable": "^0.8.15"
   }
 }
