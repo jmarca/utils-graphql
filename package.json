@@ -10,21 +10,19 @@
   "scripts": {
     "build:clean": "rm -rfv dist compat",
     "flow-copy-source": "flow-copy-source -v src",
-    "build:flow": "yarn run flow-copy-source dist && yarn run flow-copy-source compat/cjs",
+    "build:flow": "npm run flow-copy-source dist && npm run flow-copy-source compat/cjs",
     "build:readme": "pkg-to-readme --template ./readmeTemplate.ejs --force && documentation readme src/** --markdown-toc=false --section API && doctoc README.md",
     "build:src": "rollup -c",
-    "build": "yarn run build:clean && yarn run build:src && yarn run build:flow && yarn run build:readme",
+    "build": "npm run build:clean && npm run build:src && npm run build:flow && npm run build:readme",
     "lint": "eslint --rule 'flowtype-errors/show-errors: error'",
-    "lint:fix": "yarn run lint -- --fix",
-    "precommit": "lint-staged",
+    "lint:fix": "npm run lint -- --fix",
     "commit": "commit",
-    "commitmsg": "commitlint -e",
-    "version": "yarn run build:readme && git add README.md",
-    "prepack": "yarn run build:clean && yarn run build:src && yarn run build:flow"
+    "version": "npm run build:readme && git add README.md",
+    "prepack": "npm run build:clean && npm run build:src && npm run build:flow"
   },
   "lint-staged": {
     "*.js": [
-      "yarn run lint:fix",
+      "npm run lint:fix",
       "git add"
     ]
   },
@@ -64,9 +62,6 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-flow": "^7.8.3",
-    "@commitlint/cli": "7.2.1",
-    "@commitlint/config-conventional": "7.1.2",
-    "@commitlint/prompt-cli": "7.2.1",
     "doctoc": "^1.4.0",
     "documentation": "^12.1.4",
     "eslint": "^6.8.0",
@@ -89,5 +84,10 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "zen-observable": "^0.8.15"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
